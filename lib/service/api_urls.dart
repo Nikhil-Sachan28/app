@@ -7,4 +7,6 @@ class ApiUrl{
   static const String registerUrl = "api/user/register";
   static const String instituteUrl = "api/user/institutes";
   static const String coursesUrl = "api/user/courses";
+  static const String specificCoursesUrl = "api/user/course";
+  static const String govtJobs = "api/user/govtjobs";
 }

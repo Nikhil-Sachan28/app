@@ -10,11 +10,14 @@ import 'package:jobsearch/utils/sp_file.dart';
 class CourseController extends GetxController {
   var isLoading = false.obs;
   var allCourse = <CourseRes>[].obs;
+  var instituteCourse= <CourseRes>[].obs;
   @override
   void onInit(){
     super.onInit();
     fetchAllCourse();
   }
+
+
   void fetchAllCourse() async{
     isLoading(true);
     try {
@@ -33,4 +36,28 @@ class CourseController extends GetxController {
       isLoading(false);
           }
         }
-}}
+
+  void fetchSpecificCourses(String id) async{
+    instituteCourse.clear();
+    isLoading(true);
+    try {
+      var token = SpFile.getString(SpConstant.token);
+      print("${ApiUrl.specificCoursesUrl}/${id}");
+      var products = await ApiCall.getApiCall2("${ApiUrl.specificCoursesUrl}/${id}", token);
+
+      isLoading(true);
+      if (products != null) {
+        for (int i = 0; i < products.length; i++) {
+          var course = CourseRes.fromJson(products[i]);
+          instituteCourse.add(course);
+          print(course);
+        }
+      } else {
+        MyToast.toast("some error occured");
+      }
+    }finally {
+      isLoading(false);
+    }
+  }
+}
+// }

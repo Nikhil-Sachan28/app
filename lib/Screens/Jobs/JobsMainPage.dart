@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobsearch/Controller/job_controller.dart';
 
 import 'package:jobsearch/Screens/Jobs/findjob.dart';
+import 'package:jobsearch/constants/jobs_type.dart';
 import '../../Components/SearchBar.dart' as searchbar;
 import '../../Components/categoryComponent.dart';
 
@@ -114,9 +115,9 @@ class _JobsMainPageState
               categoryText: "Art & Science",
               redirectPage: () {
                 Get.to(Findjob(
-
                     jobTitle:
-                        "hiring Challanges"),
+                        "hiring Challanges",
+                    jobType: JobType.hiringChallenge),
 
 
                 );
@@ -136,7 +137,8 @@ class _JobsMainPageState
               redirectPage: () {
                 Findjob(
                     jobTitle:
-                        "hiring Challanges");
+                        "hiring Challanges",
+                    jobType: JobType.hiringChallenge);
               },
             ),
           ],
@@ -158,7 +160,8 @@ class _JobsMainPageState
               redirectPage: () {
                 Findjob(
                     jobTitle:
-                        "hiring Challanges");
+                        "hiring Challanges",
+                    jobType: JobType.hiringChallenge);
               },
             ),
             const SizedBox(
@@ -174,7 +177,8 @@ class _JobsMainPageState
               redirectPage: () {
                 Findjob(
                     jobTitle:
-                        "hiring Challanges");
+                        "hiring Challanges",
+                  jobType: JobType.hiringChallenge,);
               },
             ),
           ],
@@ -236,7 +240,10 @@ class _JobsMainPageState
               containerWidth: 0.43,
               categoryText: "Full-Time",
               redirectPage: () {
-                Get.to(Findjob(jobTitle: "Jobs"));
+                Get.to(Findjob(
+                    jobTitle: "Jobs",
+                  jobType: JobType.privateJobs,
+                ));
               },
             ),
             const SizedBox(
@@ -251,7 +258,10 @@ class _JobsMainPageState
               categoryText: "In_office",
               // isPadding: true,
               redirectPage: () {
-                Get.to(Findjob(jobTitle: "Jobs"));
+                Get.to(Findjob(
+                    jobTitle: "Jobs",
+                  jobType: JobType.privateJobs,
+                ));
               },
             ),
           ],
@@ -271,7 +281,10 @@ class _JobsMainPageState
               fontsize: 13,
               categoryText: "Virtual",
               redirectPage: () {
-                Get.to(Findjob(jobTitle: "Jobs"));
+                Get.to(Findjob(
+                  jobTitle: "Jobs",
+                  jobType: JobType.privateJobs,
+                ));
               },
             ),
             const SizedBox(
@@ -285,7 +298,11 @@ class _JobsMainPageState
               fontsize: 14,
               categoryText: "Part-Time",
               redirectPage: () {
-                Get.to(Findjob(jobTitle: "Jobs"));
+                Get.to(Findjob(
+                    jobTitle: "Jobs",
+
+                  jobType: JobType.privateJobs,
+                ));
               },
             ),
           ],
@@ -349,6 +366,7 @@ class _JobsMainPageState
               redirectPage: () {
                 Get.to(Findjob(
                     isTopBar: false,
+                    jobType: JobType.internship,
                     jobTitle: "Internships"));
               },
             ),
@@ -366,6 +384,7 @@ class _JobsMainPageState
               redirectPage: () {
                 Get.to(Findjob(
                     isTopBar: false,
+                    jobType: JobType.internship,
                     jobTitle: "Internship"));
               },
             ),
@@ -388,6 +407,7 @@ class _JobsMainPageState
               redirectPage: () {
                 Get.to(Findjob(
                     isTopBar: false,
+                    jobType: JobType.internship,
                     jobTitle: "Internship"));
               },
             ),
@@ -404,6 +424,7 @@ class _JobsMainPageState
               redirectPage: () {
                 Get.to(Findjob(
                     isTopBar: false,
+                    jobType: JobType.internship,
                     jobTitle: "Internship"));
               },
             ),
@@ -498,12 +519,14 @@ class _JobsMainPageState
                     redirectPage: () =>
                         Get.to(Findjob(
                       jobTitle: "Hiring",
+                          jobType: JobType.hiringChallenge,
                     )),
                   ),
                   CategoryComponent(
                     categoryText: "Jobs",
                     redirectPage: (){
                       Get.to(Findjob(
+                        jobType: JobType.privateJobs,
                         jobTitle: "Private Jobs",
                       ),
                       );
@@ -521,6 +544,7 @@ class _JobsMainPageState
                     categoryText: "Internships",
                     redirectPage: () =>
                         Get.to(Findjob(
+                          jobType: JobType.internship,
                       isTopBar: false,
                       jobTitle: "Internships",
                     )),
@@ -528,29 +552,14 @@ class _JobsMainPageState
                   CategoryComponent(
                     categoryText: "Govt Jobs",
                     redirectPage: () =>
-                        Get.to(Findjob(isTopBar: true,
+                        Get.to(Findjob(
+                          isTopBar: true,
+                          jobType: JobType.govtJobs,
                       jobTitle: "Government Jobs",
                     )),
                   ),
                 ],
               ),
-              // Row(
-              //   mainAxisAlignment:
-              //       MainAxisAlignment
-              //           .spaceBetween,
-              //   children: [
-              //     categoryComponent(
-              //       categoryText: "Result",
-              //       redirectPage: () =>
-              //           Get.to(findjob()),
-              //     ),
-              //     categoryComponent(
-              //       categoryText: "Exam",
-              //       redirectPage: () =>
-              //           Get.to(findjob()),
-              //     ),
-              //   ],
-              // ),
             ]),
       )),
     );

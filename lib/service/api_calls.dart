@@ -39,6 +39,12 @@ class ApiCall {
           // Res404 res401= Res404.fromJson(o);
           MyToast.toast(o?.message);
           print(o);
+        }else if(response.statusCode == 400){
+          var x = jsonDecode(response.body);
+          MyToast.toast(x["message"].toString());
+          print(x["message"].toString());
+          // Res404 res401= Res404.fromJson(o);
+          
         }
         else {
           Get.back();
@@ -102,7 +108,7 @@ class ApiCall {
     String? showToast = yes;
 
     try {
-      final response = await http.post(
+      final response = await http.get(
         Uri.parse('${ApiUrl.baseUrl}$url'),
         headers: {
           'Content-type': 'application/json',
@@ -113,12 +119,15 @@ class ApiCall {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         var o = json.decode(response.body.toString());
+        // print(o);
         return o;
       } else
-      if (response.statusCode == 401) {
+      if (response.statusCode == 401 ||  response.statusCode == 404) {
         // await pref.setBoolean("check", false);
         // Get.off(const LoginScreen());
-        MyToast.toast("token problem");
+        print(response.body);
+
+        // MyToast.toast(o);
       } else {
         Get.back();
         // print(response.body.error);
@@ -130,7 +139,7 @@ class ApiCall {
       showToast == "yes"
           ? debugPrint("something went wrong.")
           : MyToast.toast("something went wrong.");
-      debugPrint("\n\n\n From catch block \n${ApiUrl.baseUrl}/$url\n$e\n\n\n");
+      debugPrint("\n\n\n From catch block \n${ApiUrl.baseUrl}$url\n$e\n\n\n");
     }
   }
   static Future getApiCall2(String url,basicAuth1,
@@ -138,6 +147,7 @@ class ApiCall {
     String? showToast = yes;
     String basicAuth = 'Bearer $basicAuth1';
     try {
+      print('${ApiUrl.baseUrl}$url');
       final response = await http.get(
         Uri.parse('${ApiUrl.baseUrl}$url'),
         headers: {
@@ -148,7 +158,7 @@ class ApiCall {
         },
       );
       print('Token : ${basicAuth1}');
-      print('Token : ${response.body}');
+      print('Response : ${response.body}');
       if (response.statusCode == 200 || response.statusCode == 201) {
         var o = json.decode(response.body.toString());
         return o;

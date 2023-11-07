@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../modals/jobs/government_jobs.dart';
+
 class AboutUs extends StatelessWidget {
-String aboutUsDetail;
-AboutUs({required this.aboutUsDetail,Key? key}) : super(key: key);
+  // String aboutUsDetail;
+  GovernmentJobs? govermentJobs;
+  AboutUs({required this.govermentJobs,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ AboutUs({required this.aboutUsDetail,Key? key}) : super(key: key);
               CrossAxisAlignment.start,
           children: [
             const Text(
-              "About Company",
+              "About Job",
               style: TextStyle(
                 fontFamily: "DM Sans",
                 fontSize: 16,
@@ -28,12 +31,12 @@ AboutUs({required this.aboutUsDetail,Key? key}) : super(key: key);
             const SizedBox(
               height: 15,
             ),
-            Text(aboutUsDetail),
+            Text(govermentJobs?.jobDecription??''),
             const SizedBox(
               height: 15,
             ),
             const Text(
-              "Website",
+              "Exam organization",
               style: TextStyle(
                 fontFamily: "DM Sans",
                 fontSize: 16,
@@ -45,8 +48,8 @@ AboutUs({required this.aboutUsDetail,Key? key}) : super(key: key);
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              "https://ssc.nic.in/",
+             Text(
+              govermentJobs?.examOrganization??"",
               style: TextStyle(
                 fontFamily: "DM Sans",
                 fontSize: 12,
@@ -58,6 +61,87 @@ AboutUs({required this.aboutUsDetail,Key? key}) : super(key: key);
             const SizedBox(
               height: 15,
             ),
+            const Text(
+              "Exam fee",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff150b3d),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              govermentJobs?.examFee??"",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff1da1f2),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+
+            const Text(
+              "Selection Process",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff150b3d),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              govermentJobs?.selectionProcess??"",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff1da1f2),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+
+            const Text(
+              "Salary",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff150b3d),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              govermentJobs?.salary??"",
+              style: TextStyle(
+                fontFamily: "DM Sans",
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff1da1f2),
+              ),
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+
             const Text(
               "Download Notification",
               style: TextStyle(

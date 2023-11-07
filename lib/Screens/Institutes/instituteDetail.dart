@@ -58,6 +58,7 @@ class InstituteDetail extends StatelessWidget {
       onTapCommand: () {},
     ),
   ];
+  var id;
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +96,13 @@ class InstituteDetail extends StatelessWidget {
                         crossAxisCount: 3),
                 itemBuilder: (context, index) =>
                     InkWell(
-                  onTap: () =>
-                      Get.to(redirectList[index]),
+                  onTap: () =>{
+                    if(index==0){
+                      Get.to(StudyPage(id : institute.subadminId))
+                    }else
+                    Get.to(redirectList[index]),
+                  },
+
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey,

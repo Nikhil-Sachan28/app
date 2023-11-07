@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class CourseRes {
   String? sId;
   String? courseName;
@@ -43,10 +45,10 @@ class CourseRes {
     courseName = json['courseName'];
     subtitle = json['subtitle'];
     studentsEnrolled = json['studentsEnrolled'];
-    rating = json['rating'];
+    rating = (json['rating']).toDouble();
     totalReviews = json['totalReviews'];
-    price = json['price'];
-    totalHours = json['totalHours'];
+    price = (json['price']).toDouble();
+    totalHours = (json['totalHours']).toDouble();
     courseType = json['courseType'];
     totalLectures = json['totalLectures'];
     aboutCourse = json['aboutCourse'];

@@ -1,20 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-// import 'package:settings_ui/pages/settings.dart';
-//
-// class SettingsUI extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "Setting UI",
-//       home: EditProfilePage(),
-//     );
-//   }
-// }
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -25,6 +16,19 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
+  File? image;
+  Future pickImage() async {
+    try {
+      ImagePicker picker = ImagePicker();
+      // final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await picker.pickImage(source: ImageSource.gallery);
+      if(image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+    } on PlatformException catch(e) {
+      print('Failed to pick image: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +60,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
           child: ListView(
             children: [
-              // Center(
-              //   child: Text(
-              //     "Edit Profile",
-              //     style: TextStyle(
-              //         fontSize: 25,
-              //         fontWeight:
-              //             FontWeight.w500),
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 15,
-              // ),
+
               Center(
                 child: Stack(
                   children: [
@@ -88,9 +81,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
+                              image: image==null?NetworkImage(
                                 "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              ))),
+                              ) : Image.file(image!) as ImageProvider
+                          )
+                      ),
                     ),
                     Positioned(
                         bottom: 0,
@@ -106,9 +101,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                             color: Colors.green,
                           ),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
+                          child: IconButton(
+                            onPressed: () async {
+                              // await pickImage();
+                            },
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            ),
                           ),
                         )),
                   ],

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../modals/jobs/government_jobs.dart';
+
 class Post extends StatelessWidget {
-  const Post({Key? key}) : super(key: key);
+  final GovernmentJobs? govermentJobs;
+   const Post({Key? key, required this.govermentJobs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,100 +22,102 @@ class Post extends StatelessWidget {
   }
 
   Widget important() {
-    return Row(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
-        mainAxisAlignment:
-            MainAxisAlignment.start,
-        children: [
+    return
+    // return Row(
+    //     crossAxisAlignment:
+    //         CrossAxisAlignment.start,
+    //     mainAxisAlignment:
+    //         MainAxisAlignment.start,
+    //     children: [
+    //       SizedBox(
+    //         width: Get.width * 0.45,
+    //         child: Column(
+    //           crossAxisAlignment:
+    //               CrossAxisAlignment.start,
+    //           children: const [
+    //             Text(
+    //               "Important Dates",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 14,
+    //                 fontWeight: FontWeight.w700,
+    //                 color: Color(0xff150b3d),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             SizedBox(
+    //               height: 20,
+    //             ),
+    //             Text(
+    //               "Application Begin : 30/06/2023",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             Text(
+    //               "Last Date for Apply Online : 21/07/2023",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             Text(
+    //               "Pay Fee Online Last Date : 22/07/2023",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             Text(
+    //               "Correction Date : 26-28 July 2023",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             Text(
+    //               "CBT Exam Date Paper I : September 2023",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             ),
+    //             Text(
+    //               "Paper II Exam Date: As per Schedule",
+    //               style: TextStyle(
+    //                 fontFamily: "DM Sans",
+    //                 fontSize: 12,
+    //                 fontWeight: FontWeight.w400,
+    //                 color: Color(0xff514a6b),
+    //               ),
+    //               textAlign: TextAlign.left,
+    //             )
+    //           ],
+    //         ),
+    //       ),
           SizedBox(
-            width: Get.width * 0.45,
-            child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Important Dates",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff150b3d),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Application Begin : 30/06/2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "Last Date for Apply Online : 21/07/2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "Pay Fee Online Last Date : 22/07/2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "Correction Date : 26-28 July 2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "CBT Exam Date Paper I : September 2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "Paper II Exam Date: As per Schedule",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            width: Get.width * 0.45,
+            // width: Get.width * 0.45,
             child: Column(
               crossAxisAlignment:
                   CrossAxisAlignment.start,
               children: [
+
                 Text(
                   "Important Dates",
                   style: TextStyle(
@@ -127,7 +132,17 @@ class Post extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Application Begin : 30/06/2023",
+                  "Application Begin : ${govermentJobs?.applicationDate??""}",
+                  style: TextStyle(
+                    fontFamily: "DM Sans",
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff514a6b),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                 Text(
+                  "Last Date for Apply Online : ${govermentJobs?.applicationDate??""}",
                   style: TextStyle(
                     fontFamily: "DM Sans",
                     fontSize: 12,
@@ -137,7 +152,17 @@ class Post extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  "Last Date for Apply Online : 21/07/2023",
+                  "Pay Fee Online Last Date : ${govermentJobs?.applicationDate??""}",
+                  style: const TextStyle(
+                    fontFamily: "DM Sans",
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff514a6b),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  "Correction Date : ${govermentJobs?.applicationDate??""}",
                   style: TextStyle(
                     fontFamily: "DM Sans",
                     fontSize: 12,
@@ -147,27 +172,7 @@ class Post extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  "Pay Fee Online Last Date : 22/07/2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "Correction Date : 26-28 July 2023",
-                  style: TextStyle(
-                    fontFamily: "DM Sans",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff514a6b),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  "CBT Exam Date Paper I : September 2023",
+                  "CBT Exam Date Paper I : ${govermentJobs?.expectedExamDate??""}",
                   style: TextStyle(
                     fontFamily: "DM Sans",
                     fontSize: 12,
@@ -178,8 +183,8 @@ class Post extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ]);
+          );
+        // ]);
   }
 
   Widget ageLimit(

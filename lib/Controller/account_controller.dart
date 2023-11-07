@@ -35,6 +35,7 @@ class AccountController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
 
   Future<bool> loginUser() async {
     isLoading(true);
@@ -65,7 +66,7 @@ class AccountController extends GetxController {
 
   Future<bool> registerUser() async {
     isLoading(true);
-    RegisterReq req = RegisterReq(email: emailController.text, password: passController.text, name: nameController.text, mobile: "1243367890");
+    RegisterReq req = RegisterReq(email: emailController.text, password: passController.text, name: nameController.text, mobile: mobileController.text);
     try {
       var response = await ApiCall.postApiCall(ApiUrl.registerUrl, req);
       print(response);
@@ -74,14 +75,13 @@ class AccountController extends GetxController {
         print("---------------response not null----------");
         isLoading(false);
         RegisterRes resp = RegisterRes.fromJson(response);
-        // token =  resp.token??"";
-        // SpFile.setString(SpConstant.token, resp.token??"");
-        Get.off(BottomNavigationBarScreen());
+
+        Get.offAll(BottomNavigationBarScreen());
         return true;
       }else{
         print("---------------response null----------");
         isLoading(false);
-        MyToast.toast(response??"");
+        // MyToast.toast(response??"");
         return false;
       }
     } catch(e) {

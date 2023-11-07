@@ -253,6 +253,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (!val!.isNotEmpty && !val.isNotNull) return 'Enter valid password';
                         },
                       ),
+                      CustomFormField(
+                        controller: accountController.mobileController,
+                        hintText: 'Mobile',
+                        validator: (val) {
+                          if (!val!.isNotEmpty && !val.isNotNull) return 'Enter valid number';
+                        },
+                      ),
                       const SizedBox(height: 20),
 
                       InkWell(

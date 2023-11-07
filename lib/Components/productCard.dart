@@ -8,7 +8,7 @@ class ProductCard extends StatelessWidget {
   String courseName;
   int lesson;
   int student;
-  int star;
+  double star;
   String level;
   String courseimage;
   void Function() onTapCommand;
@@ -211,12 +211,13 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  courseStar(int star) {
+  courseStar(double star) {
+
     return SizedBox(
       width: 65,
       height: 45,
       child: Image.asset(
-        "assets/star$star.png",
+        "assets/star${star.round()}.png",
         colorBlendMode: BlendMode.color,
       ),
     );

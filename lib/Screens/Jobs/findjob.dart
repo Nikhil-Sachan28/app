@@ -5,12 +5,16 @@ import 'package:jobsearch/Controller/job_controller.dart';
 import 'package:jobsearch/Screens/Jobs/resultPage.dart';
 import 'package:jobsearch/Screens/Jobs/viewJobDetail.dart';
 
+import '../../constants/jobs_type.dart';
+
 class Findjob extends StatefulWidget {
   String jobTitle;
   bool isTopBar;
+  JobType jobType;
 
   Findjob(
       {Key? key,
+        required this.jobType,
       required this.jobTitle,
       this.isTopBar = false})
       : super(key: key);
@@ -20,7 +24,7 @@ class Findjob extends StatefulWidget {
 }
 
 List<Widget> topViewList = [
-  const JobsGridView(),
+  const JobsGridView(jobtype : JobType.govtJobs),
   ResultAdminCardPage(),
   ResultAdminCardPage(adminCard: true),
 ];
@@ -28,8 +32,16 @@ List<Widget> topViewList = [
 var indexvalue = 0;
 
 class _FindjobState extends State<Findjob> {
+  JobController jobController = Get.put(JobController());
+  @override
+  void initState() {
+    jobController.fetchGovernmentJob();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    widget.jobType;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,7 +59,8 @@ class _FindjobState extends State<Findjob> {
         Expanded(
             child: widget.isTopBar
                 ? topViewList[indexvalue]
-                : const JobsGridView())
+                :  JobsGridView(jobtype: widget.jobType)
+        )
       ]),
     );
   }
@@ -103,128 +116,132 @@ class _FindjobState extends State<Findjob> {
 }
 
 class JobsGridView extends StatelessWidget {
-  const JobsGridView({Key? key})
+  final JobType jobtype;
+  const JobsGridView({Key? key, required this.jobtype})
       : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+    JobController jobController = Get.put(JobController());
     return SingleChildScrollView(
-      child: GetBuilder <JobController>(
-        builder: (jobController){
-          return SizedBox(
+      child:
+      // GetBuilder <JobController>(
+      //   builder: (jobController){
+      //     return
+      SizedBox(
             width: Get.width * .96,
             height: Get.height * 1,
-            child: GridView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: 30,
-              shrinkWrap: true,
-              physics: RangeMaintainingScrollPhysics(),
-              padding: EdgeInsets.only(bottom: 150),
-              gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.75,
-                  crossAxisCount: 2),
-              itemBuilder: (context, index) =>
-                  Container(
-                    // height: Get.height * 0.6,
-                    // width: Get.width * 0.45,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 8),
-                    decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black,
-                            spreadRadius: 1,
-                            blurRadius: 3)
-                      ],
-                      color: Colors.white,
-                      borderRadius:
-                      BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 1, bottom: 5),
-                            height: 75,
-                            width: 75,
-                            decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.black,
-                                      spreadRadius: 1,
-                                      blurRadius: 3)
-                                ],
-                                color: Colors.white,
-                                borderRadius:
-                                BorderRadius.circular(
-                                    100)),
-                          ),
-                          Text(
-                            // jobController.allPrivateJobs[index].name,
-                            "jobController.allPrivateJobs[index].name",
-                            style: const TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                          ),
-                          Text(
-                            "Total Post  $index",
-                            style: const TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          const Text(
-                            "Last Date  21 July 2023",
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.right,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(
-                                      ()=> JobDetail());
-                            },
-                            child: Container(
-                              height: 35,
-                              width: 90,
+            child: Obx(()=>
+                GridView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: jobController.allGovernmentJobs.length,
+                shrinkWrap: true,
+                physics: RangeMaintainingScrollPhysics(),
+                padding: EdgeInsets.only(bottom: 150),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.75,
+                    crossAxisCount: 2),
+                  itemBuilder: (context, index) =>
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black,
+                              spreadRadius: 1,
+                              blurRadius: 3)
+                        ],
+                        color: Colors.white,
+                        borderRadius:
+                        BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.center,
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 1, bottom: 5),
+                              height: 75,
+                              width: 75,
                               decoration: BoxDecoration(
-                                  color: const Color(
-                                      0xFF3D5CFF),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.black,
+                                        spreadRadius: 1,
+                                        blurRadius: 3)
+                                  ],
+                                  color: Colors.white,
                                   borderRadius:
-                                  BorderRadius
-                                      .circular(20)),
-                              child: const Center(
-                                child: Text(
-                                  "View Job",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight:
-                                      FontWeight
-                                          .w500),
+                                  BorderRadius.circular(
+                                      100)),
+                            ),
+                            Text(
+                              jobController.allGovernmentJobs[index].jobPost??"",
+                              // "jobController.allPrivateJobs[index].name",
+                              style: const TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                            ),
+                            Text(
+                              "Total Post  ${jobController.allGovernmentJobs[index].totalVacancy}",
+                              style: const TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                             Text(
+                              "Last Date  ${jobController.allGovernmentJobs[index].applicationDate}",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.to(
+                                        ()=> JobDetail(govermentJobs: jobController.allGovernmentJobs[index]));
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                    color: const Color(
+                                        0xFF3D5CFF),
+                                    borderRadius:
+                                    BorderRadius
+                                        .circular(20)),
+                                child: const Center(
+                                  child: Text(
+                                    "View Job",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight:
+                                        FontWeight
+                                            .w500),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        ]),
-                  ),
+                            )
+                          ]),
+                    ),
+              ),
             ),
-          );
-        },
-      )
+          ),
+      //   },
+      // )
     );
   }
 }

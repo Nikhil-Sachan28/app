@@ -57,8 +57,9 @@ class _InstituteMainPageState
                 margin: const EdgeInsets.only(
                     bottom: 25),
                   child: InkWell(
-                    onTap: () =>
-                        Get.to(InstituteDetail(institute: instituteController.allInstitute[index])),
+                    onTap: () =>{
+                      Get.to(InstituteDetail(institute: instituteController.allInstitute[index]))
+                    },
                     child: InstituteCard(showDetail: true,institute: instituteController.allInstitute[index],),
                 ),
               ),

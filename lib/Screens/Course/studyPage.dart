@@ -11,18 +11,28 @@ import 'package:jobsearch/Controller/course_controller.dart';
 // import 'package:jobsearch/Model/Jobs/GovernmentJob.dart';
 
 class StudyPage extends StatefulWidget {
-  const StudyPage({super.key});
+  final id;
+  const StudyPage({super.key, this.id});
 
   @override
   State<StudyPage> createState() => _StudyPageState();
 }
 
 class _StudyPageState extends State<StudyPage> {
+
+  CourseController courseController = Get.put(CourseController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(widget.id!=null){
+      courseController.fetchSpecificCourses(widget.id);
+      print(widget.id);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    CourseController courseController = Get.put(CourseController());
-
     return Scaffold(
 
       appBar: AppBar(
@@ -71,26 +81,50 @@ class _StudyPageState extends State<StudyPage> {
             ),
             Expanded(
 
-                child: Obx( ()=>
+                child: Obx( ()=> widget.id==null?
                     ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: courseController.allCourse.length,
                       itemBuilder: (context, index) =>
                           ProductCard(
-                            onTapCommand: () => Get.to(
-                                 CourseDetailPage(course : courseController.allCourse[index])),
+                            onTapCommand: () =>
+                            Get.to(
+                            CourseDetailPage(course : courseController.allCourse[index])),
                             // courseName:jobController.allGovernmentJobs[index].title,
-                            courseName:"",
-                            lesson: 1,
-                            level: "Expert",
-                            star: 4,
-                            student: 2,
-                            courseimage:
-                            "https://wallpaperaccess.com/full/2637581.jpg",
-
+                              courseName:courseController.allCourse[index].courseName??"",
+                              lesson: courseController.allCourse[index].totalLectures??0,
+                              level: "Expert",
+                              star: courseController.allCourse[index].rating??0,
+                              student: courseController.allCourse[index].studentsEnrolled??0,
+                              courseimage:
+                              "https://wallpaperaccess.com/full/2637581.jpg",
                           )
-                  ),
+                  ):courseController.instituteCourse.length>0?
+                ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: courseController.instituteCourse.length,
+                    itemBuilder: (context, index) =>
+                        ProductCard(
+                          onTapCommand: () =>
+                              Get.to(
+                                  CourseDetailPage(course : courseController.instituteCourse[index])),
+                          // courseName:jobController.allGovernmentJobs[index].title,
+                          courseName:courseController.instituteCourse[index].courseName??"",
+                          lesson: courseController.instituteCourse[index].totalLectures??0,
+                          level: "Expert",
+                          star: courseController.instituteCourse[index].rating??0,
+                          student: courseController.instituteCourse[index].studentsEnrolled??0,
+                          courseimage:
+                          "https://wallpaperaccess.com/full/2637581.jpg",
+                        )
+                ):
+                    Center(
+                      child: Text("no course exists"),
+
+                    )
+
                 )
             )
           ]);

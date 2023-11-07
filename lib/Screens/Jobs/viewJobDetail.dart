@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:jobsearch/Screens/Jobs/RelatedJobs.dart';
 import 'package:jobsearch/Screens/Jobs/post.dart';
 
+import '../../modals/jobs/government_jobs.dart';
 import 'aboutUs.dart';
 
 class JobDetail extends StatefulWidget {
-String AboutUsDetail;
- JobDetail({this.AboutUsDetail= "this is default about Company detail", Key? key}) : super(key: key);
+  String? aboutUsDetail;
+  GovernmentJobs? govermentJobs;
+
+ JobDetail({required this.govermentJobs, Key? key}) : super(key: key);
 
   @override
   State<JobDetail> createState() =>
@@ -49,14 +52,14 @@ class _JobDetailState extends State<JobDetail> {
                 margin: const EdgeInsets.only(
                     left: 20, right: 15),
                 child: SingleChildScrollView(
-            child:(() {
-             if(indexvalue == 0){
-               return AboutUs(aboutUsDetail: widget.AboutUsDetail,);
-             }else if(indexvalue == 1){return const Post();}
-             else if(indexvalue == 2){
-              return const RelatedJobs();
-             } else {AboutUs(aboutUsDetail: widget.AboutUsDetail,);}
-            }()),
+                child:(() {
+                 if(indexvalue == 0){
+                   return AboutUs(govermentJobs: widget.govermentJobs);
+                 }else if(indexvalue == 1){return  Post(govermentJobs: widget.govermentJobs);}
+                 else if(indexvalue == 2){
+                  return const RelatedJobs();
+                 } else {AboutUs(govermentJobs: widget.govermentJobs);}
+                }()),
                 ),
               ),
             ],
@@ -110,7 +113,7 @@ class _JobDetailState extends State<JobDetail> {
     return Center(
         child: Container(
       width: Get.width * 0.9,
-      height: Get.height * 0.08,
+      height: Get.height * 0.07 ,
       padding: const EdgeInsets.symmetric(
           horizontal: 4, vertical: 4),
       decoration: BoxDecoration(
@@ -118,7 +121,7 @@ class _JobDetailState extends State<JobDetail> {
           borderRadius:
               BorderRadius.circular(15)),
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: TabBar(
             onTap: (index) => setState(() {
                   indexvalue = index;
@@ -144,12 +147,12 @@ class _JobDetailState extends State<JobDetail> {
                   child: Text("Post"),
                 ),
               ),
-              Tab(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text("Jobs"),
-                ),
-              ),
+              // Tab(
+              //   child: Align(
+              //     alignment: Alignment.center,
+              //     child: Text("Jobs"),
+              //   ),
+              // ),
             ]),
       ),
     ));
